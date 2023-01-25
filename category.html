@@ -124,9 +124,9 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
-              <a href="#"
+              <a href="learning_mat.html"
                 ><i
                   class="bx bx-chalkboard"
                   style="color: #b2ed53; font-size: 25px"
@@ -134,7 +134,7 @@
               ></a>
             </div>
             <div class="col one">
-              <p><a href="#">Learning Materials</a></p>
+              <p><a href="learning_mat.html">Learning Materials</a></p>
             </div>
           </div>
 
@@ -152,7 +152,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -166,7 +166,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 nav-btn py-2 pb-3">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -177,7 +177,7 @@
             </div>
 
             <div class="col one">
-              <button class="border-0 bg-transparent">Logout</button>
+              <button class="border-0 bg-transparent" onclick="logout()">Logout</button>
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@
 
         <!-- section for the number cards -->
         <section
-          class="list-card p-4 d-lg-flex flex-wrap justify-content-between gap-4"
+          class="list-card p-4 d-md-flex flex-wrap justify-content-between gap-4"
         ></section>
 
         <!-- for top three modal -->
@@ -213,7 +213,7 @@
             Add Categories
           </p>
           <div
-            class="p-4 p-lg-5 pt-2 d-lg-flex justify-content-between align-items-between"
+            class="p-4 p-lg-5 pt-2 d-md-flex justify-content-between align-items-between"
           >
             <!--first card to add categories-->
             <div class="cat-card">
@@ -260,20 +260,18 @@
             <div class="cat-list"></div>
           </div>
         </section>
-      </section>
-    </main>
 
-    <!-- for the update button modal -->
+        <!-- for the update button modal -->
     <div class="modal-card-container">
       <div class="modal-card">
         <div class="card p-4 rounded-4 border-0 shadow-lg">
-          <button class="col-4 btn ms-auto btn-primary" onclick="changeImg()">Change Image</button>
+          <button class="col-sm-6 col-md-6 col-lg-4 btn ms-auto px-0 btn-primary" onclick="changeImg()">Change Image</button>
           <div>
             <label for="" class="fs-5 fw-semibold">Categories</label><br />
             <input
               type="text"
               placeholder="Enter Categories Here"
-              class="w-100 rounded-3 p-2 my-2 form-control"
+              class="w-100 rounded-3 p-2 my-2 form-control cat-name"
               id="catnamemodal"
             />
           </div>
@@ -283,19 +281,19 @@
             <input
               type="input"
               placeholder="Enter Categories Image Here"
-              class="w-100 rounded-3 p-2 my-2 form-control imgfileone"
+              class="w-100 rounded-3 p-2 my-2 form-control imgfileone cat-img-two"
               id="catimgmodal"
             />
             <input
               type="file"
               placeholder="Enter Categories Here"
-              class="w-100 rounded-3 p-2 my-2 form-control imgfiletwo"
+              class="w-100 rounded-3 p-2 my-2 form-control imgfiletwo cat-img"
             />
           </div>
 
           <button
             class="btn btn-primary mt-3 p-2 fs-5"
-            onclick="postCategory(event)"
+            onclick="updateCat(event)"
           >
             <div
               class="spinner-border spinner-border-sm text-light"
@@ -304,11 +302,14 @@
             >
               <span class="sr-only"></span>
             </div>
-            Create Category
+            Update Category
           </button>
         </div>
       </div>
     </div>
+
+      </section>
+    </main>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"

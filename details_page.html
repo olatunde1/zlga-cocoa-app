@@ -124,9 +124,9 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
-              <a href="#"
+              <a href="learning_mat.html"
                 ><i
                   class="bx bx-chalkboard"
                   style="color: #b2ed53; font-size: 25px"
@@ -134,7 +134,7 @@
               ></a>
             </div>
             <div class="col one">
-              <p><a href="#">Learning Materials</a></p>
+              <p><a href="learning_mat.html">Learning Materials</a></p>
             </div>
           </div>
 
@@ -152,7 +152,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -166,7 +166,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 nav-btn py-2 pb-3">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -177,7 +177,7 @@
             </div>
 
             <div class="col one">
-              <button class="border-0 bg-transparent">Logout</button>
+              <button class="border-0 bg-transparent" onclick="logout()">Logout</button>
             </div>
           </div>
         </div>
@@ -238,9 +238,56 @@
             </div>
 
             <!--second card to view added category details-->
-            <div class="subcatList mt-4"></div>
+            <div class="subcatList mt-5 d-flex flex-wrap justify-content-between"></div>
           </div>
         </section>
+         <!-- for sub category modal -->
+         <section class="subcatmodal-container w-100">
+          
+          <!--first card to add categories-->
+          <div class="cat-card m-auto subcatmodal">
+            <div class="card p-4 rounded-4 border-0 shadow-lg">
+            
+                
+              <div>
+                <label for="" class="fs-5 fw-semibold">Sub-Categories</label
+                ><br />
+                <input
+                  type="text"
+                  placeholder="Enter Sub Categories Here"
+                  class="w-100 rounded-3 p-2 my-2 form-control"
+                  id="subcat-name"
+                />
+              </div>
+
+              <div class="pt-2">
+                <label for="" class="fs-5 fw-semibold"
+                  >Sub-Category Images</label
+                ><br />
+                <input
+                  type="file"
+                  placeholder="Enter Sub Categories Here"
+                  class="w-100 rounded-3 p-2 my-2 form-control"
+                  id="subcat-img"
+                />
+              </div>
+
+              <button
+                class="btn btn-primary mt-3 p-2 fs-5"
+                onclick="updateSubCat(event)"
+              >
+                <div
+                  class="spinner-border spinner-border-sm text-light"
+                  id="spin"
+                  role="status"
+                >
+                  <span class="sr-only"></span>
+                </div>
+                Update
+              </button>
+            </div>
+          </div>
+      </section>
       </section>
     </main>
     <script

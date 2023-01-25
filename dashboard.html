@@ -20,7 +20,6 @@
   </head>
   <body>
     <main class="d-lg-flex">
-      <!-- the side bar -->
       <div class="pagemodal">
         <div class="preloader">
           <svg
@@ -31,68 +30,69 @@
             preserveAspectRatio="xMidYMid"
             class="lds-ripple"
             style="background: 0 0"
+            >
+            <circle
+            cx="50"
+            cy="50"
+            r="4.719"
+            fill="none"
+            stroke="#1d3f72"
+            stroke-width="2"
+            >
+            <animate
+            attributeName="r"
+            calcMode="spline"
+            values="0;40"
+            keyTimes="0;1"
+            dur="3"
+            keySplines="0 0.2 0.8 1"
+            begin="-1.5s"
+            repeatCount="indefinite"
+            />
+            <animate
+            attributeName="opacity"
+            calcMode="spline"
+            values="1;0"
+            keyTimes="0;1"
+            dur="3"
+            keySplines="0.2 0 0.8 1"
+            begin="-1.5s"
+            repeatCount="indefinite"
+            />
+          </circle>
+          <circle
+          cx="50"
+          cy="50"
+          r="27.591"
+          fill="none"
+          stroke="#5699d2"
+          stroke-width="2"
           >
-            <circle
-              cx="50"
-              cy="50"
-              r="4.719"
-              fill="none"
-              stroke="#1d3f72"
-              stroke-width="2"
-            >
-              <animate
-                attributeName="r"
-                calcMode="spline"
-                values="0;40"
-                keyTimes="0;1"
-                dur="3"
-                keySplines="0 0.2 0.8 1"
-                begin="-1.5s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="opacity"
-                calcMode="spline"
-                values="1;0"
-                keyTimes="0;1"
-                dur="3"
-                keySplines="0.2 0 0.8 1"
-                begin="-1.5s"
-                repeatCount="indefinite"
-              />
-            </circle>
-            <circle
-              cx="50"
-              cy="50"
-              r="27.591"
-              fill="none"
-              stroke="#5699d2"
-              stroke-width="2"
-            >
-              <animate
-                attributeName="r"
-                calcMode="spline"
-                values="0;40"
-                keyTimes="0;1"
-                dur="3"
-                keySplines="0 0.2 0.8 1"
-                begin="0s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="opacity"
-                calcMode="spline"
-                values="1;0"
-                keyTimes="0;1"
-                dur="3"
-                keySplines="0.2 0 0.8 1"
-                begin="0s"
-                repeatCount="indefinite"
-              />
-            </circle>
-          </svg>
-        </div>
-      </div>
+          <animate
+          attributeName="r"
+          calcMode="spline"
+          values="0;40"
+          keyTimes="0;1"
+          dur="3"
+          keySplines="0 0.2 0.8 1"
+          begin="0s"
+          repeatCount="indefinite"
+          />
+          <animate
+          attributeName="opacity"
+          calcMode="spline"
+          values="1;0"
+          keyTimes="0;1"
+          dur="3"
+          keySplines="0.2 0 0.8 1"
+          begin="0s"
+          repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+    </div>
+  </div>
+  <!-- the side bar -->
       <aside class="sidebar" id="mysidebar">
         <p>Yoruba Aloud</p>
         <div class="pt-4">
@@ -124,9 +124,9 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
-              <a href="#"
+              <a href="learning_mat.html"
                 ><i
                   class="bx bx-chalkboard"
                   style="color: #b2ed53; font-size: 25px"
@@ -134,7 +134,7 @@
               ></a>
             </div>
             <div class="col one">
-              <p><a href="#">Learning Materials</a></p>
+              <p><a href="learning_mat.html">Learning Materials</a></p>
             </div>
           </div>
 
@@ -152,7 +152,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -161,12 +161,12 @@
                 ></i
               ></a>
             </div>
-            <div class="col one">
-              <p><a href="#">Admin Profile</a></p>
+             <div class="col one">
+              <p>Admin Profile</a></p>
             </div>
           </div>
 
-          <div class="row my-2 nav-btn">
+          <div class="row my-2 nav-btn py-2 pb-3">
             <div class="col-2">
               <a href="#"
                 ><i
@@ -177,7 +177,7 @@
             </div>
 
             <div class="col one">
-              <button class="border-0 bg-transparent">Logout</button>
+              <button class="border-0 bg-transparent" onclick="logout()">Logout</button>
             </div>
           </div>
         </div>
@@ -193,7 +193,7 @@
 
         <!-- section for the number cards -->
         <section
-          class="list-card p-4 d-lg-flex flex-wrap justify-content-between gap-4"
+          class="list-card p-4 d-md-flex flex-wrap justify-content-between gap-4"
         ></section>
 
         <!-- the table to show students details -->

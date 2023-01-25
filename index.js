@@ -1,11 +1,12 @@
-//details page
+//details page to get id that was passed to the url of the page
 const title = document.querySelector("#nam");
 const detailId = new URLSearchParams(window.location.search).get("id");
 const detailName = new URLSearchParams(window.location.search).get("name");
 title.textContent = detailName;
 
-//get sub category list
+//get sub category list (moved this to top (hoisting))
 function subCatList() {
+  localStorage.setItem("subcat",detailId)
   const subcat = document.querySelector(".subcatList");
 
   //get token
@@ -27,13 +28,12 @@ function subCatList() {
   fetch(url, myReq)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       if (result.length>0){
         const allList = result.forEach((list) => {
-          console.log(list)
-          viewAll +=`<div class="col-sm-12 col-md-12 col-lg-6 card">
-          <a href="details_subpage.html?id=${list.id}&name=${list.name}"><img src=${list.image} alt="sub-category-image" /></a>
-          <p class="mt-4">${list.name}</p>
+          viewAll +=`<div class="col-sm-12 col-md-12 col-lg-5 p-4 m-3 card">
+          <a href="details_page.html?id=${list.id}&name=${list.name}"><img src=${list.image} alt="sub-category-image" width="100%" height="250px"/></a>
+          <p class="mt-4 fw-bold fs-5">${list.name}</p>
+          <button class="btn btn-primary col-6" onclick="updateSubBtn(${list.id})">Update</button>
           </div>`;
         });
       }
@@ -47,7 +47,7 @@ function subCatList() {
 }
 subCatList();
 
-// function for register
+// function for register new user
 function signUp(event) {
   event.preventDefault();
 
@@ -111,7 +111,6 @@ function signUp(event) {
     fetch(url, signReq)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
 
         //if the registration is successful
         if (result.status === "success") {
@@ -139,7 +138,7 @@ function signUp(event) {
       .catch((error) => console.log("error", error));
   }
 }
-
+// function to login user
 function loginUser(event) {
   event.preventDefault();
   const getSpinn = document.getElementById("spinn");
@@ -281,7 +280,6 @@ function getDashApi() {
   fetch(url, dashReq)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       const getCat = document.querySelector(".cat");
       const getLearn = document.querySelector(".learn");
       const getTotsub = document.querySelector(".totsub");
@@ -304,7 +302,6 @@ getDashApi();
 
 //to get top three students
 const getThree = document.querySelector("#threestd");
-
 function topThree() {
   const threeModal = document.querySelector(".topmodal-container");
   const topMod = document.querySelector(".topmodal");
@@ -474,7 +471,6 @@ function postCategory(event) {
 }
 
 //get category list
-
 function getCategory() {
   url = "https://pluralcodesandbox.com/yorubalearning/api/admin/category_list";
 
@@ -498,10 +494,10 @@ function getCategory() {
       let catList = "";
       const listLoop = result.forEach((list) => {
         catList += `<div class="card card-list-two m-auto p-4 rounded-4 border-0 shadow-lg my-4">
-          <a href="details_page.html?id=${list.id}&name=${list.name}"><img src=${list.image} alt="category-image" /></a>
-          <p>${list.name}</p>
-          <div class="d-flex w-100 btn-class">
-          <button class="btn btn-danger update" onclick="updateBtn(${list.id})">Update</button>
+          <a href="details_page.html?id=${list.id}&name=${list.name}"><img src=${list.image} alt="category-image" width="100%" /></a>
+          <p class="fw-bold py-2 fs-5">${list.name}</p>
+          <div class="d-flex w-100 btn-class justify-content-between">
+          <button class="btn btn-primary update" onclick="updateBtn(${list.id})">Update</button>
           <button class="btn btn-danger" onclick="deleteBtn(${list.id})">Delete</button>
           </div>
         </div>
@@ -550,6 +546,79 @@ function updateBtn(detailId) {
       catImgModal.setAttribute("value", result.image);
     });
 }
+//update category function
+function updateCat(event){
+  event.preventDefault();
+
+  const getSpin = document.getElementById("spin");
+  getSpin.style.display = "inline-block"; 
+  const getId = localStorage.getItem("catId");
+  const getName= document.querySelector(".cat-name").value;
+  const getImg= document.querySelector(".cat-img").files[0];
+  // const getImgtwo= document.querySelector(".cat-img-two").files[0];
+
+   //to check if fields are empty
+   if (getImg === "" || getName === "") {
+    Swal.fire({
+      icon: "info",
+      text: "All fields are required!",
+      confirmButtonColor: "#2d85de",
+    });
+    getSpin.style.display = "none";
+  } else {
+    //get token
+    const myToken = localStorage.getItem("result");
+    const myT = JSON.parse(myToken);
+    const realToken = myT.token;
+
+    const tokHead = new Headers();
+    tokHead.append("Authorization", `Bearer ${realToken}`);
+
+    //get formdata
+    const myData = new FormData();
+    myData.append("name", getName);
+    myData.append("image", getImg);
+    // myData.append("image", getImgtwo);
+    myData.append("category_id", getId);
+
+    const catReq = {
+      method: "POST",
+      headers: tokHead,
+      body: myData,
+    };
+  const url = "https://pluralcodesandbox.com/yorubalearning/api/admin/update_category";
+  fetch(url, catReq)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          Swal.fire({
+            icon: "success",
+            text: result.message,
+            confirmButtonColor: "#2d85de",
+          });
+          setTimeout(function () {
+            location.reload();
+          }, 3000);
+          getSpin.style.display = "none";
+        } else {
+          Swal.fire({
+            icon: "info",
+            text: "unsuccessful",
+            confirmButtonColor: "#2d85de",
+          });
+          getSpin.style.display = "none";
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+}
+//change Image on update category modal
+function changeImg() {
+  const chngone = document.querySelector(".imgfileone");
+  const chngtwo = document.querySelector(".imgfiletwo");
+  chngone.style.display = "none";
+  chngtwo.style.display = "block";
+}
 
 //delete category button
 function deleteBtn(detailId) {
@@ -575,7 +644,6 @@ function deleteBtn(detailId) {
   fetch(url, myReq)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       if (result.status === "success") {
         Swal.fire({
           icon: "info",
@@ -598,16 +666,8 @@ function deleteBtn(detailId) {
     });
 }
 
-//change Image on update category modal
-function changeImg() {
-  const chngone = document.querySelector(".imgfileone");
-  const chngtwo = document.querySelector(".imgfiletwo");
-  chngone.style.display = "none";
-  chngtwo.style.display = "block";
-}
 
 //create sub categories
-
 function subCategory(event) {
   event.preventDefault();
 
@@ -650,7 +710,6 @@ function subCategory(event) {
     fetch(url, myReq)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         if (result.status === "success") {
           Swal.fire({
             icon: "success",
@@ -674,3 +733,162 @@ function subCategory(event) {
   }
 }
 
+//subcategory update button
+function updateSubBtn(detailId) {
+  let viewForm = document.querySelector(".subcatmodal-container");
+  viewForm.style.display = "block";
+
+  const catId = localStorage.setItem("subcatId", detailId);
+
+  //prefilling on the update sub category modal
+
+  //get token
+  const myToken = localStorage.getItem("result");
+  const myT = JSON.parse(myToken);
+  const realToken = myT.token;
+
+  const tokHead = new Headers();
+  tokHead.append("Authorization", `Bearer ${realToken}`);
+
+  const getCatId = localStorage.getItem("subcatId");
+
+  const catReq = {
+    method: "GET",
+    headers: tokHead,
+  };
+
+  const url = `https://pluralcodesandbox.com/yorubalearning/api/admin/get_details?subcategory_id=${getCatId}`;
+
+  fetch(url, catReq)
+    .then((response) => response.json())
+    .then((result) => {
+      const catNameModal = document.querySelector("#subcat-name");
+      const catImgModal = document.querySelector("#subcat-img");
+
+      catNameModal.setAttribute("value", result.name);
+      catImgModal.setAttribute("value", result.image);
+    });
+}
+
+//update button function for subcategory
+function updateSubCat(event){
+  event.preventDefault();
+
+  const getSpin = document.getElementById("spin");
+  getSpin.style.display = "inline-block";
+  const subcat = localStorage.getItem("subcatId");
+
+  const subName = document.querySelector("#subcat-name").value;
+  const subImg = document.querySelector("#subcat-img").files[0];
+
+  if (subName === "" || subImg === ""){
+    Swal.fire({
+      icon:"info",
+      text:"Fields must not be empty",
+      confirmButtonColor:"#2d85de"
+    })
+    getSpin.style.display="none";
+  }
+  else {
+
+  //formdata
+  const formDt = new FormData()
+  formDt.append("name",subName)
+  formDt.append("image",subImg)
+  formDt.append("subcategory_id", subcat)
+
+  //get token
+  const tok = localStorage.getItem("result");
+  const parsetok = JSON.parse(tok);
+  const mytokk = parsetok.token; 
+
+  //get headers
+  const subhead = new Headers();
+  subhead.append("Authorization", `Bearer ${mytokk}`)
+
+  //req
+  const req = {
+    method: "POST",
+    headers:subhead,
+    body: formDt
+  }
+
+  const url = "https://pluralcodesandbox.com/yorubalearning/api/admin/update_subcategory";
+
+  fetch(url,req)
+  .then(response=>response.json())
+  .then(result=>{
+    if (result.status === "success"){
+      Swal.fire({
+        icon: "success",
+        text: result.message,
+        confirmButtonColor: "#2d85de"
+      })
+      setInterval(function(){
+        location.reload()
+      },3000)
+      getSpin.style.display = "none";
+    }
+    else {
+      Swal.fire({
+        icon: "info",
+        text: "Unsuccessful",
+        confirmButtonColor: "#2d85de"
+      })
+      getSpin.style.display = "none";
+    }
+  })
+  .catch(error=>console.log(error))
+}
+}
+
+//logout function
+function logout(){
+  localStorage.clear()
+  location.href="index.html"
+}
+
+//create learning materials button modal
+function createBtn(){
+  const learnBtn = document.querySelector(".learnmodal-container");
+  learnBtn.style.display = "block";
+  const closebtn = document.querySelector("#close");
+  const handleClose = () => {
+    learnBtn.style.display = "none";
+  };
+  closebtn.addEventListener("click", handleClose);
+}
+
+//form modals in create materials
+function openmoddef(event){
+  event.preventDefault();
+  const defmod = document.querySelector(".moddef")
+  const readmod = document.querySelector(".modread")
+  const conmod = document.querySelector(".modcon")
+
+  defmod.style.display = "block";
+  readmod.style.display = "none";
+  conmod.style.display = "none";
+}
+
+function openmodread(event){
+  event.preventDefault();
+  const defmod = document.querySelector(".moddef")
+  const readmod = document.querySelector(".modread")
+  const conmod = document.querySelector(".modcon")
+
+  defmod.style.display = "none";
+  readmod.style.display = "block";
+  conmod.style.display = "none";
+}
+
+function openmodcon(event){
+  event.preventDefault();
+  const defmod = document.querySelector(".moddef")
+  const readmod = document.querySelector(".modread")
+  const conmod = document.querySelector(".modcon")
+
+  defmod.style.display = "none";
+  readmod.style.display = "none";
+  conmod.style.display = "block";
+}
