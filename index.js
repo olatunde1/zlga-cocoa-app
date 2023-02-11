@@ -4,19 +4,22 @@ const detailId = new URLSearchParams(window.location.search).get("id");
 const detailName = new URLSearchParams(window.location.search).get("name");
 title.textContent = detailName;
 
+//get token from users details
+const getToken =(details)=>{
+  const getDetails = localStorage.getItem(details);
+  const parseDetails = JSON.parse(getDetails);
+  const getToken = parseDetails.token;
+  return getToken;
+}
+
 //get sub category list (moved this to top (hoisting))
 function subCatList() {
   localStorage.setItem("subcat",detailId)
   const subcat = document.querySelector(".subcatList");
 
-  //get token
-  const tok = localStorage.getItem("result");
-  const parseTok = JSON.parse(tok);
-  const myTok = parseTok.token;
-
   //get headers
   const myheader = new Headers();
-  myheader.append("Authorization", `Bearer ${myTok}`);
+  myheader.append("Authorization", `Bearer ${getToken("result")}`);
 
   const myReq = {
     method: "GET",
@@ -191,9 +194,9 @@ function loginUser(event) {
 }
 
 //for shrinking hamburger menu
-const menu = document.querySelector(".second-section");
-const sideMenu = document.querySelector(".sidebar");
 function handleMenu() {
+  const menu = document.querySelector(".second-section");
+  const sideMenu = document.querySelector(".sidebar");
   let x = document.getElementById("mysidebar");
   if (screen.width < 998 && x.className === "sidebar") {
     x.className += " siderestwo";
@@ -262,13 +265,8 @@ function getDashApi() {
   const getModal = document.querySelector(".pagemodal");
   getModal.style.display = "block";
 
-  // get your token from localstorage
-  const tokenItem = localStorage.getItem("result");
-  const myToken = JSON.parse(tokenItem);
-  const theToken = myToken.token;
-
   const dashHead = new Headers();
-  dashHead.append("Authorization", `Bearer ${theToken}`);
+  dashHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   const dashReq = {
     method: "GET",
@@ -314,14 +312,10 @@ function topThree() {
   getModal.style.display = "block";
   const url =
     "https://pluralcodesandbox.com/yorubalearning/api/admin/top_three_students";
-  //to get token from local storage
-  const getToken = localStorage.getItem("result");
-  const parseToken = JSON.parse(getToken);
-  const myToken = parseToken.token;
 
-  //get headers
+  //get headers and add token
   const tokHead = new Headers();
-  tokHead.append("Authorization", `Bearer ${myToken}`);
+  tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   //get second parameter in fetch
   const req = {
@@ -365,8 +359,8 @@ function topThree() {
       getModal.style.display = "none";
     })
     .catch((error) => console.log("error", error));
-}
-getThree.addEventListener("click", topThree);
+  }
+  getThree.addEventListener("click", topThree);
 
 //function to populate the students table
 async function getAllStudents() {
@@ -374,14 +368,10 @@ async function getAllStudents() {
   const url =
     "https://pluralcodesandbox.com/yorubalearning/api/admin/get_all_students";
 
-  //to get token
-  const getT = localStorage.getItem("result");
-  const parseT = JSON.parse(getT);
-  const myT = parseT.token;
 
   //get headers
   const tokHead = new Headers();
-  tokHead.append("Authorization", `Bearer ${myT}`);
+  tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   const req = {
     method: "GET",
@@ -422,13 +412,9 @@ function postCategory(event) {
     });
     getSpin.style.display = "none";
   } else {
-    //get token
-    const myToken = localStorage.getItem("result");
-    const myT = JSON.parse(myToken);
-    const realToken = myT.token;
 
     const tokHead = new Headers();
-    tokHead.append("Authorization", `Bearer ${realToken}`);
+    tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
     //get formdata
     const myData = new FormData();
@@ -474,13 +460,8 @@ function postCategory(event) {
 function getCategory() {
   url = "https://pluralcodesandbox.com/yorubalearning/api/admin/category_list";
 
-  //get token
-  const myToken = localStorage.getItem("result");
-  const myT = JSON.parse(myToken);
-  const realToken = myT.token;
-
   const tokHead = new Headers();
-  tokHead.append("Authorization", `Bearer ${realToken}`);
+  tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   const catReq = {
     method: "GET",
@@ -519,13 +500,8 @@ function updateBtn(detailId) {
 
   //prefilling on the update category modal
 
-  //get token
-  const myToken = localStorage.getItem("result");
-  const myT = JSON.parse(myToken);
-  const realToken = myT.token;
-
   const tokHead = new Headers();
-  tokHead.append("Authorization", `Bearer ${realToken}`);
+  tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   const getCatId = localStorage.getItem("catId");
 
@@ -555,7 +531,6 @@ function updateCat(event){
   const getId = localStorage.getItem("catId");
   const getName= document.querySelector(".cat-name").value;
   const getImg= document.querySelector(".cat-img").files[0];
-  // const getImgtwo= document.querySelector(".cat-img-two").files[0];
 
    //to check if fields are empty
    if (getImg === "" || getName === "") {
@@ -566,13 +541,8 @@ function updateCat(event){
     });
     getSpin.style.display = "none";
   } else {
-    //get token
-    const myToken = localStorage.getItem("result");
-    const myT = JSON.parse(myToken);
-    const realToken = myT.token;
-
     const tokHead = new Headers();
-    tokHead.append("Authorization", `Bearer ${realToken}`);
+    tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
     //get formdata
     const myData = new FormData();
@@ -626,14 +596,9 @@ function deleteBtn(detailId) {
   const getId = localStorage.getItem("getId");
   const url = `https://pluralcodesandbox.com/yorubalearning/api/admin/delete_category/${getId}`;
 
-  //token
-  const getTok = localStorage.getItem("result");
-  const getTokreq = JSON.parse(getTok);
-  const myTok = getTokreq.token;
-
   //headers
   const getHead = new Headers();
-  getHead.append("Authorization", `Bearer ${myTok}`);
+  getHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   //req
   const myReq = {
@@ -684,11 +649,6 @@ function subCategory(event) {
     });
     getSpin.style.display = "none";
   } else {
-    //get token
-    const tok = localStorage.getItem("result");
-    const myTokk = JSON.parse(tok);
-    const tokk = myTokk.token;
-
     //get form data
     const getFormdata = new FormData();
     getFormdata.append("name", subName);
@@ -697,7 +657,7 @@ function subCategory(event) {
 
     //get headers
     const myHeader = new Headers();
-    myHeader.append("Authorization", `Bearer ${tokk}`);
+    myHeader.append("Authorization", `Bearer ${getToken("result")}`);
 
     //set method and header
     const myReq = {
@@ -742,13 +702,8 @@ function updateSubBtn(detailId) {
 
   //prefilling on the update sub category modal
 
-  //get token
-  const myToken = localStorage.getItem("result");
-  const myT = JSON.parse(myToken);
-  const realToken = myT.token;
-
   const tokHead = new Headers();
-  tokHead.append("Authorization", `Bearer ${realToken}`);
+  tokHead.append("Authorization", `Bearer ${getToken("result")}`);
 
   const getCatId = localStorage.getItem("subcatId");
 
@@ -795,16 +750,11 @@ function updateSubCat(event){
   const formDt = new FormData()
   formDt.append("name",subName)
   formDt.append("image",subImg)
-  formDt.append("subcategory_id", subcat)
-
-  //get token
-  const tok = localStorage.getItem("result");
-  const parsetok = JSON.parse(tok);
-  const mytokk = parsetok.token; 
+  formDt.append("subcategory_id", subcat) 
 
   //get headers
   const subhead = new Headers();
-  subhead.append("Authorization", `Bearer ${mytokk}`)
+  subhead.append("Authorization", `Bearer ${getToken("result")}`)
 
   //req
   const req = {
@@ -849,14 +799,16 @@ function logout(){
 }
 
 //create learning materials button modal
-function createBtn(){
-  const learnBtn = document.querySelector(".learnmodal-container");
+function createBtn(modal){
+  const learnBtn = document.querySelector(modal);
   learnBtn.style.display = "block";
-  const closebtn = document.querySelector("#close");
+  const closebtn = document.querySelectorAll(".close");
+  const closebtn2 = document.querySelector("#close");
   const handleClose = () => {
     learnBtn.style.display = "none";
   };
-  closebtn.addEventListener("click", handleClose);
+  closebtn.forEach(btn=>btn.addEventListener("click", handleClose));
+  closebtn2.addEventListener("click", handleClose);
 }
 
 //form modals in create materials
@@ -892,3 +844,5 @@ function openmodcon(event){
   readmod.style.display = "none";
   conmod.style.display = "block";
 }
+
+

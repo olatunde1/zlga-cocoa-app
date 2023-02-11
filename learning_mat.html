@@ -162,7 +162,7 @@
               ></a>
             </div>
              <div class="col one">
-              <p>Admin Profile</a></p>
+              <p><a>Admin Profile</a></p>
             </div>
           </div>
 
@@ -185,23 +185,27 @@
 
       <section class="second-section">
         <header
-          class="shadow d-md-flex align-items-center gap-4 p-4 sticky-top bg-light justify-content-between"
+          class="shadow d-md-flex align-items-center p-4 sticky-top bg-light justify-content-between"
         >
           <span class="ham fs-1" onclick="handleMenu()">&#9776;
           
           </span> 
           <span class="fs-3 fw-bold">Learning Details</span>
           <p class="fs-3 pt-3 fw-bold" id="nam"></p>
-          <select>
-            <option>Categories</option>
-          </select>
-          <button class="btn btn-primary col-3 px-0 py-2" onclick="createBtn()">Create materials</button>
+          <div class="catdrop fw-semibold">
+            <span class="ct">Categories</span> <span class="cat">&#65088;</span>
+             <!-- dropdown list -->
+              <div class="card dplist py-4">
+              </div>
+          </div>
+          <button class="btn btn-primary col-12 col-md-4 col-lg-3 px-0 py-2" onclick="createBtn('.learnmodal-container')">Create materials</button>
         </header>
         
         <!-- the section to view learning materials that are created -->
-        <section class="card shadow-lg border-0 p-3 m-4 learnsec">
+        <section class="shadow-lg border-0 p-3 m-4 learnsec">
           
         </section>
+
 
         <!-- the popup modal  -->
         <section>
@@ -217,71 +221,97 @@
 
                 <!-- the default form -->
                 <div class="moddef">
-                <div class="form-head px-3 pb-3 m-auto d-lg-flex justify-content-between">
-                  <button class="btn mb-3 mb-md-0 fs-5 fw-bold btn-primary" onclick="openmoddef(event)">Default</button>
-                  <button class="btn mb-3 mb-md-0 btn-outline-secondary text-primary fs-5 fw-bold" onclick="openmodread(event)">Reading</button>
-                  <button class="btn mb-3 mb-md-0 btn-outline-secondary fs-5 fw-bold text-primary" onclick="openmodcon(event)">Conversation</button>
+                <div class="form-head">
+                  <button class="btn fw-bold btn-primary " onclick="openmoddef(event)">Default</button>
+                  <button class="btn btn-outline-secondary text-primary fw-bold" onclick="openmodread(event)">Reading</button>
+                  <button class="btn btn-outline-secondary  fw-bold text-primary" onclick="openmodcon(event)">Conversation</button>
                 </div>
 
-                <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fs-5 fw-semibold">
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
+                <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fw-semibold">
+                  <input type="text" placeholder="Enter title name here" class="form-text form-control mb-3" id="defname"/>
                   <div>
                     <label class="form-label">Enter Image File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                    <input type="file" class="form-control mb-2" id="defimg"/>
                   </div>
                   <div>
                     <label class="form-label">Enter Audio File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                    <input type="file" class="form-control mb-2" id="defaudio"/>
                   </div>
-                  <button class="btn btn-primary col-12 fs-4 mt-3">Create Default</button>
+                  <button class="btn btn-primary col-12 mt-3" onclick="defButton(event)">
+                    <div
+                    class="spinner-border spinner-border-sm text-light"
+                    id="spin"
+                    role="status"
+                  >
+                    <span class="sr-only"></span>
+                  </div>
+                  Create Default</button>
                 </form>
                 </div>
 
                 <!-- the reading form -->
                 <div class="modread">
-                <div class="form-head px-3 pb-3 m-auto d-lg-flex justify-content-between">
-                  <button class="btn mb-3 mb-md-0 text-primary fs-5 fw-bold btn-outline-secondary" onclick="openmoddef(event)">Default</button>
-                  <button class="btn mb-3 mb-md-0 btn-primary fs-5 fw-bold" onclick="openmodread(event)">Reading</button>
-                  <button class="btn mb-3 mb-md-0 btn-outline-secondary fs-5 fw-bold text-primary" onclick="openmodcon(event)">Conversation</button>
+                <div class="form-head">
+                  <button class="btn text-primary fw-bold btn-outline-secondary" onclick="openmoddef(event)">Default</button>
+                  <button class="btn btn-primary fw-bold" onclick="openmodread(event)">Reading</button>
+                  <button class="btn btn-outline-secondary fw-bold text-primary" onclick="openmodcon(event)">Conversation</button>
                 </div>
 
-                <form class="form-container form-body m-auto p-3 p-lg-4 shadow-lg rounded-4 fs-5 fw-semibold">
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
+                <form class="form-container form-body m-auto p-3 p-lg-4 shadow-lg rounded-4 fw-semibold">
+                  <input type="text" placeholder="Enter English word" class="form-text form-control mb-3" id="engread"/>
+                  <input type="text" placeholder="Enter Yoruba word" class="form-text form-control mb-3" id="youread"/>
                   <div>
                     <label class="form-label">Enter Image File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                    <input type="file" class="form-control mb-2" id="readimg"/>
                   </div>
                   <div>
                     <label class="form-label">Enter Audio File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                    <input type="file" class="form-control mb-2" id="readaudio"/>
                   </div>
-                  <button class="btn btn-primary col-12 fs-4 mt-3">Create Reading</button>
+                  <button class="btn btn-primary col-12 mt-3" onclick="readButton(event)"><div
+                    class="spinner-border spinner-border-sm text-light"
+                    id="spiner"
+                    role="status"
+                  >
+                    <span class="sr-only"></span>
+                  </div>
+                  Create Reading</button>
                 </form>
                 </div>
 
                 <!-- the conversation form -->
                 <div class="modcon">
-                <div class="form-head px-3 pb-3 m-auto d-lg-flex justify-content-between">
-                  <button class="btn text-primary mb-3 mb-md-0 fs-5 fw-bold btn-outline-secondary" onclick="openmoddef(event)">Default</button>
-                  <button class="btn text-primary mb-3 mb-md-0 fs-5 fw-bold btn-outline-secondary" onclick="openmodread(event)">Reading</button>
-                  <button class="btn fs-5 fw-bold mb-3 mb-md-0 btn-primary" onclick="openmodcon(event)">Conversation</button>
+                <div class="form-head">
+                  <button class="btn text-primary fw-bold btn-outline-secondary" onclick="openmoddef(event)">Default</button>
+                  <button class="btn text-primary fw-bold btn-outline-secondary" onclick="openmodread(event)">Reading</button>
+                  <button class="btn fw-bold btn-primary" onclick="openmodcon(event)">Conversation</button>
                 </div>
 
-                <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fs-5 fw-semibold">
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
-                  <input type="text" placeholder="Enter word" class="form-text form-control mb-3 fs-5"/>
+                <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fw-semibold">
+                  <input type="text" placeholder="Enter English question" class="form-text form-control mb-3" id="engqst"/>
+                  <input type="text" placeholder="Enter Yoruba question" class="form-text form-control mb-3" id="youqst"/>
+                  <input type="text" placeholder="Enter English answer" class="form-text form-control mb-3" id="engans"/>
+                  <input type="text" placeholder="Enter Yoruba answer" class="form-text form-control mb-3" id="youans"/>
+                  <div>
+                    <label class="form-label">Audio Question in Yoruba</label>
+                    <input type="file" class="form-control mb-2" id="audioqst"/>
+                  </div>
+                  <div>
+                    <label class="form-label">Audio Answer in Yoruba</label>
+                    <input type="file" class="form-control mb-2" id="audioans"/>
+                  </div>
                   <div>
                     <label class="form-label">Enter Image File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                    <input type="file" class="form-control mb-2" id="conimg"/>
                   </div>
-                  <div>
-                    <label class="form-label">Enter Audio File</label>
-                    <input type="file" class="form-control mb-2 fs-5"/>
+                  <button class="btn btn-primary col-12 mt-3" onclick="converseButton(event)"><div
+                    class="spinner-border spinner-border-sm text-light"
+                    id="spinner"
+                    role="status"
+                  >
+                    <span class="sr-only"></span>
                   </div>
-                  <button class="btn btn-primary col-12 fs-4 mt-3">Create Conversation</button>
+                  Create Conversation</button>
                 </form>
                 </div>
 
@@ -290,9 +320,135 @@
           </div>
         </section>
 
+        <!-- ....................................................... -->
+        <!-- the modal for update button -->
+        <section>
+          <div class="learnmodal-container-update">
+            <div class="learnmodal pb-4">
+              <header class="top-head">
+                <h4>Update Learning Categories</h4>
+                <span class="close">x</span>
+              </header>
+              <div class="moddeff">
+                <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fw-semibold">
+                  <input type="text" placeholder="Enter title name here" class="form-text form-control mb-3 defname"/>
+                  <div>
+                    <label class="form-label">Enter Image File</label>
+                    <input type="file" class="form-control mb-2 defimg"/>
+                  </div>
+                  <div>
+                    <label class="form-label">Enter Audio File</label>
+                    <input type="file" class="form-control mb-2 defaudio"/>
+                  </div>
+                  <button class="btn btn-primary col-12 mt-3" onclick="updateDefButton(event)">
+                    <div
+                    class="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    id="spi"
+                  >
+                    <span class="sr-only"></span>
+                  </div>
+                  Update Default</button>
+                </form>
+                </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="learnmodal-container-update-read">
+            <div class="learnmodal pb-4">
+              <header class="top-head">
+                <h4>Update Learning Categories</h4>
+                <span class="close">x</span>
+              </header>
+        <!-- the reading form -->
+        <div class="modreadd">
+
+          <form class="form-container form-body m-auto p-3 p-lg-4 shadow-lg rounded-4 fw-semibold">
+            <input type="text" placeholder="Enter English word" class="form-text form-control mb-3 engread"/>
+            <input type="text" placeholder="Enter Yoruba word" class="form-text form-control mb-3 youread"/>
+            <div>
+              <label class="form-label">Enter Image File</label>
+              <input type="file" class="form-control mb-2 readimg"/>
+            </div>
+            <div>
+              <label class="form-label">Enter Audio File</label>
+              <input type="file" class="form-control mb-2 readaudio"/>
+            </div>
+            <button class="btn btn-primary col-12 mt-3" onclick="updateReadButton(event)"><div
+              class="spinner-border spinner-border-sm text-light"
+              id="spii"
+              role="status"
+            >
+              <span class="sr-only"></span>
+            </div>
+            Update Reading</button>
+          </form>
+          </div>
+
+          </div>
+          </div>
+          </section>
+
+
+          <section>
+            <div class="learnmodal-container-update-con">
+              <div class="learnmodal pb-4">
+                <header class="top-head">
+                  <h4>Update Learning Categories</h4>
+                  <span class="close">x</span>
+                </header>
+          <!-- the conversation form -->
+          <div class="modconn">
+
+          <form class="form-container form-body m-auto p-3 p-md-4 shadow-lg rounded-4 fw-semibold">
+            <input type="text" placeholder="Enter English question" class="form-text form-control mb-3 engqst"/>
+            <input type="text" placeholder="Enter Yoruba question" class="form-text form-control mb-3 youqst"/>
+            <input type="text" placeholder="Enter English answer" class="form-text form-control mb-3 engans"/>
+            <input type="text" placeholder="Enter Yoruba answer" class="form-text form-control mb-3 youans"/>
+            <div>
+              <label class="form-label">Audio Question in Yoruba</label>
+              <input type="file" class="form-control mb-2 audioqst"/>
+            </div>
+            <div>
+              <label class="form-label">Audio Answer in Yoruba</label>
+              <input type="file" class="form-control mb-2 audioans"/>
+            </div>
+            <div>
+              <label class="form-label">Enter Image File</label>
+              <input type="file" class="form-control mb-2 conimg"/>
+            </div>
+            <button class="btn btn-primary col-12 mt-3" onclick="updateConverseButton(event)"><div
+              class="spinner-border spinner-border-sm text-light"
+              id="spiii"
+              role="status"
+            >
+              <span class="sr-only"></span>
+            </div>
+            Update Conversation</button>
+          </form>
+          </div>
+          </div>
+          </div>
+
       </section>
     </main>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"
+  ></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="auth.js"></script>
     <script src="index.js"></script>
+    <script src="learnmat.js"></script>
   </body>
 </html>
