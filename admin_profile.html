@@ -110,7 +110,7 @@
             </div>
           </div>
 
-          <div class="row my-2 nav-btn active">
+          <div class="row my-2 nav-btn">
             <div class="col-2">
               <a href="category.html"
                 ><i
@@ -124,7 +124,7 @@
             </div>
           </div>
 
-          <div class="row my-2 align-items-center nav-btn">
+          <div class="row my-2 nav-btn align-items-center">
             <div class="col-2">
               <a href="learning_mat.html"
                 ><i
@@ -152,7 +152,7 @@
             </div>
           </div>
 
-          <div class="row my-2 align-items-center nav-btn">
+          <div class="row my-2 align-items-center nav-btn active">
             <div class="col-2">
               <a href="admin_profile.html"
                 ><i
@@ -177,140 +177,101 @@
             </div>
 
             <div class="col one">
-              <button class="border-0 bg-transparent" onclick="logout()">Logout</button>
+              <button class="border-0 bg-transparent" onclick="logout()">
+                Logout
+              </button>
             </div>
           </div>
         </div>
       </aside>
 
-      <!--The righthand side of the page-->
       <section class="second-section">
         <header
-          class="shadow d-flex align-items-center gap-4 p-4 sticky-top bg-light"
+          class="shadow d-md-flex align-items-center p-4 sticky-top bg-light justify-content-between"
         >
-          <span class="ham fs-1" onclick="handleMenu()">&#9776;</span>
-          <p class="fs-3 pt-3" id="nam">yorubaaloud</p>
+          <span
+            class="ham fs-1 d-flex align-items-center"
+            onclick="handleMenu()"
+            >&#9776;
+
+            <span class="fs-3 fw-bold px-4">Admin</span>
+          </span>
+          <p class="fs-3 pt-3 fw-bold" id="nam"></p>
         </header>
 
-        <!-- section for the number cards -->
-        <section
-          class="list-card p-4 d-md-flex flex-wrap justify-content-between gap-4"
-        ></section>
-
-        <!-- for top three modal -->
-        <section class="topmodal-container">
-          <div class="topmodal pb-4 mb-2">
-            <header class="top-head">
-              <h2>Top three students</h2>
-              <span id="close">x</span>
-            </header>
-          </div>
-        </section>
-
-        <!--The catogory card-->
-        <section>
-          <p class="fs-3 pt-4 fw-semibold text-center add-cat">
-            Add Categories
-          </p>
-          <div
-            class="p-4 p-lg-5 pt-2 d-md-flex justify-content-between align-items-between"
-          >
-            <!--first card to add categories-->
-            <div class="cat-card">
-              <div class="card p-4 rounded-4 border-0 shadow-lg">
-                <div>
-                  <label for="" class="fs-5 fw-semibold">Categories</label
-                  ><br />
-                  <input
-                    type="text"
-                    placeholder="Enter Categories Here"
-                    class="w-100 rounded-3 p-2 my-2 form-control"
-                    id="catname"
-                  />
-                </div>
-
-                <div class="pt-2">
-                  <label for="" class="fs-5 fw-semibold">Category Images</label
-                  ><br />
-                  <input
-                    type="file"
-                    placeholder="Enter Categories Here"
-                    class="w-100 rounded-3 p-2 my-2 form-control"
-                    id="catimg"
-                  />
-                </div>
-
-                <button
-                  class="btn btn-primary mt-3 p-2 fs-5"
-                  onclick="postCategory(event)"
-                >
-                  <div
-                    class="spinner-border spinner-border-sm text-light"
-                    id="spin"
-                    role="status"
-                  >
-                    <span class="sr-only"></span>
+        <div class="px-4 py-5">
+            <div class="pb-3">
+                <form class="admin_form m-auto fs-5 fw-semibold shadow-lg">
+                  <p class="text-center fs-4 text-primary">Update Profile</p>
+                  <div>
+                    <label>Update Name</label>
+                    <input
+                      type="text"
+                      class="form-control mt-3 admin-name"
+                      placeholder="Enter Name"
+                    />
                   </div>
-                  Create Category
-                </button>
+                  <div>
+                    <label class="mt-3">Update Email</label>
+                    <input
+                      type="email"
+                      class="form-control mt-3 admin-email"
+                      placeholder="Enter Email Address"
+                    />
+                  </div>
+                  <button class="btn btn-primary col-12 my-3" onclick="updateAdmin(event)">
+                    <div
+                        class="spinner-border spinner-border-sm text-light spin"
+                        role="status"
+                        >
+                        <span class="sr-only"></span>
+                        </div>
+                        Update</button>
+                </form>
               </div>
-            </div>
+          <hr />
 
-            <!--second card to view added category details-->
-            <div class="cat-list"></div>
+          <div class="pt-3">
+            <form class="admin_form m-auto fs-5 fw-semibold shadow-lg">
+              <p class="text-center fs-4 text-primary">Update Password</p>
+              <div>
+                <label>Enter Current Email</label>
+                <input
+                  type="email"
+                  class="form-control mt-3 email-update"
+                  placeholder="Enter Email Address"
+                />
+              </div>
+              <div>
+                <label class="mt-3">New Password</label>
+                <input
+                  type="password"
+                  class="form-control mt-3 new-pass"
+                  placeholder="Enter Password"
+                />
+              </div>
+              <div>
+                <label class="mt-3">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control mt-3 confirm-pass"
+                  placeholder="Confirm Password"
+                />
+              </div>
+              <button class="btn btn-primary col-12 my-3" onclick="updatePassword(event)">
+                <div
+                        class="spinner-border spinner-border-sm text-light spi"
+                        role="status"
+                        >
+                        <span class="sr-only"></span>
+                        </div>
+                        Update</button>
+            </form>
           </div>
-        </section>
-
-        <!-- for the update button modal -->
-    <div class="modal-card-container">
-      <div class="modal-card">
-        <div class="card p-4 rounded-4 border-0 shadow-lg">
-          <button class="col-sm-6 col-md-6 col-lg-4 btn ms-auto px-0 btn-primary" onclick="changeImg()">Change Image</button>
-          <div>
-            <label for="" class="fs-5 fw-semibold">Categories</label><br />
-            <input
-              type="text"
-              placeholder="Enter Categories Here"
-              class="w-100 rounded-3 p-2 my-2 form-control cat-name"
-              id="catnamemodal"
-            />
-          </div>
-
-          <div class="pt-2">
-            <label for="" class="fs-5 fw-semibold">Category Images</label><br />
-            <input
-              type="input"
-              placeholder="Enter Categories Image Here"
-              class="w-100 rounded-3 p-2 my-2 form-control imgfileone cat-img-two"
-              id="catimgmodal"
-            />
-            <input
-              type="file"
-              placeholder="Enter Categories Here"
-              class="w-100 rounded-3 p-2 my-2 form-control imgfiletwo cat-img"
-            />
-          </div>
-
-          <button
-            class="btn btn-primary mt-3 p-2 fs-5"
-            onclick="updateCat(event)"
-          >
-            <div
-              class="spinner-border spinner-border-sm text-light"
-              id="spin"
-              role="status"
-            >
-              <span class="sr-only"></span>
-            </div>
-            Update Category
-          </button>
+          
         </div>
-      </div>
-    </div>
-
       </section>
     </main>
-
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
       integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
@@ -325,5 +286,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="auth.js"></script>
     <script src="index.js"></script>
+    <script src="learnmat.js"></script>
   </body>
 </html>

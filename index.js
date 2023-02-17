@@ -9,6 +9,7 @@ const getToken =(details)=>{
   const getDetails = localStorage.getItem(details);
   const parseDetails = JSON.parse(getDetails);
   const getToken = parseDetails.token;
+  // console.log(getToken)
   return getToken;
 }
 
@@ -110,7 +111,7 @@ function signUp(event) {
     };
 
     //using fetch to call the API
-    const url = "https://codesandbox.com.ng/yorubalearning/api/register_admin";
+    const url = "https://pluralcodesandbox.com/yorubalearning/api/register_admin";
     fetch(url, signReq)
       .then((response) => response.json())
       .then((result) => {
@@ -774,7 +775,7 @@ function updateSubCat(event){
         text: result.message,
         confirmButtonColor: "#2d85de"
       })
-      setInterval(function(){
+      setTimeout(function(){
         location.reload()
       },3000)
       getSpin.style.display = "none";
