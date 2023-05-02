@@ -19,6 +19,11 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="pagemodal">
+      <div class="preloader">
+          <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ripple" style="background:0 0"><circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="-1.5s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="-1.5s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2"><animate attributeName="r" calcMode="spline" values="0;40" keyTimes="0;1" dur="3" keySplines="0 0.2 0.8 1" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" calcMode="spline" values="1;0" keyTimes="0;1" dur="3" keySplines="0.2 0 0.8 1" begin="0s" repeatCount="indefinite"/></circle></svg>
+      </div>
+      </div>
     <main class="d-lg-flex">
       <div class="pagemodal">
         <div class="preloader">
@@ -94,7 +99,7 @@
   </div>
   <!-- the side bar -->
       <aside class="sidebar" id="mysidebar">
-        <p>Yoruba Aloud</p>
+        <p>ZLGA COCOA PROJECT</p>
         <div class="pt-4">
           <div class="row my-2 nav-btn active">
             <div class="col-2">
@@ -120,11 +125,11 @@
               ></a>
             </div>
             <div class="col one">
-              <p><a href="category.html">Categories</a></p>
+              <p><a href="createForm.html">Create form</a></p>
             </div>
           </div>
 
-          <div class="row my-2 align-items-center nav-btn">
+          <!-- <div class="row my-2 align-items-center nav-btn">
             <div class="col-2">
               <a href="learning_mat.html"
                 ><i
@@ -164,7 +169,7 @@
              <div class="col one">
               <p><a href="admin_profile.html">Admin Profile</a></p>
             </div>
-          </div>
+          </div> -->
 
           <div class="row my-2 nav-btn py-2 pb-3">
             <div class="col-2">
@@ -188,29 +193,99 @@
           class="shadow d-flex align-items-center gap-4 p-4 sticky-top bg-light"
         >
           <span class="ham fs-1" onclick="handleMenu()">&#9776;</span>
-          <p class="fs-3 pt-3" id="nam">yorubaaloud</p>
+          <p class="fs-3 pt-3" id="nam">ZLGA</p>
         </header>
 
         <!-- section for the number cards -->
-        <section
-          class="list-card p-4 d-md-flex flex-wrap justify-content-between gap-4"
-        ></section>
+      <!-- popup for details -->
 
-        <!-- the table to show students details -->
-        <section class="card m-lg-4 shadow-lg table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Position</th>
-                <th>Total Score</th>
-              </tr>
-            </thead>
-            <tbody class="tableBody"></tbody>
-          </table>
-        </section>
+<div class="pop-container">
+
+  <div class="popup">
+    
+  </div>
+</div>
+
+  <section class="section main-section">
+    <div class="grid gap-6 grid-cols-1 md:grid-cols-3 mb-6">
+      <div class="card">
+        <div class="card-content">
+          <div class="flex items-center justify-between">
+            <div class="widget-label">
+              <h3>
+                Numbers of Registered Patients
+              </h3>
+              <h1>
+                
+              </h1>
+            </div>
+            <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="totalcards">
+      <div class="card rec">
+        <h2 class="bold">Total Records</h2>
+        <p class="recordnum1"></p>
+      </div>
+      <div class="card rec">
+        <h2 class="bold">Total Men</h2>
+        <p class="recordnum2"></p>
+      </div>
+      <div class="card rec">
+        <h2 class="bold">Total Women</h2>
+        <p class="recordnum3"></p>
+      </div>
+    </div>
+
+    <div class="searchWrapper">
+      <input type="text" class="search-input" placeholder="Search by gender,name or card number"/>
+      <button class="search-btn" onclick="searchData()">Search</button>
+    </div>
+    <div class="card has-table">
+      <header class="card-header  patHeader">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+          Patients Record
+        </p>
+        <form action="">
+          <label for="">start-date</label>
+          <input class="start" type="date">
+          <label for="">end-date</label>
+          <input class="end" type="date">
+          <button class="viewMoree">filter</button>
+        </form>
+        <a href="#" class="card-header-icon">
+          <span class="icon"><i class="mdi mdi-reload"></i></span>
+        </a>
+      </header>
+      <div class="card-content card m-lg-4 shadow-lg">
+        <table id="empty">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Card Number</th>
+            <th>view more</th>
+            <!-- <th>Delete</th> -->
+           
+          </tr>
+          </thead>
+          <tbody class="patData">
+        
+          </tbody>
+        </table>
+         <div class="pagination">
+          <ul> <!--pages or li are comes from javascript --> </ul>
+        </div>
+
+      </div>
+    </div>
+    
+  </section>
 
         <!-- for top three modal -->
         <section class="topmodal-container">
@@ -223,7 +298,8 @@
         </section>
       </section>
     </main>
-    <script src="auth.js"></script>
-    <script src="index.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="dashboard.js"></script>
   </body>
 </html>
