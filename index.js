@@ -195,20 +195,20 @@
 // }
 
 // //for shrinking hamburger menu
-// function handleMenu() {
-//   const menu = document.querySelector(".second-section");
-//   const sideMenu = document.querySelector(".sidebar");
-//   let x = document.getElementById("mysidebar");
-//   if (screen.width < 998 && x.className === "sidebar") {
-//     x.className += " siderestwo";
-//   } else if (x.className === "sidebar") {
-//     x.className += " sideres";
-//     menu.className += " side";
-//   } else {
-//     x.className = "sidebar";
-//     menu.className = "second-section";
-//   }
-// }
+function handleMenu() {
+  const menu = document.querySelector(".second-section");
+  const sideMenu = document.querySelector(".sidebar");
+  let x = document.getElementById("mysidebar");
+  if (screen.width < 998 && x.className === "sidebar") {
+    x.className += " siderestwo";
+  } else if (x.className === "sidebar") {
+    x.className += " sideres";
+    menu.className += " side";
+  } else {
+    x.className = "sidebar";
+    menu.className = "second-section";
+  }
+}
 
 // //get sub headings for the cards
 // const subHeadings = [
