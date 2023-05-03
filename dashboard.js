@@ -566,6 +566,11 @@ function threeCards() {
     }
   }
   
+  function logout(){
+    localStorage.clear()
+    location.href="index.html"
+}
+
   // const apiUrl = 'https://zlglobalalliance.com.ng/api/daterange-filter-medical-records?page=1';
   // const perPage = 10;
   // let currentPage = 1;
